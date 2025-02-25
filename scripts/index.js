@@ -1,6 +1,6 @@
 // @todo: Темплейт карточки
 // @todo: DOM узлы
-const cardTemp = document.querySelector('#card-template');
+const cardTemp = document.querySelector('#card-template').content;
 //const addButton = document.querySelector('.profile__add-button');
 const deleteButton = document.querySelector('.card__delete-button');
 const placesList = document.querySelector('.places__list');
@@ -21,8 +21,8 @@ function addCard({ name, link }) {
 
 // @todo: Функция удаления карточки
 function deleteCard() {
-  const cards = this.parentElement;
-  cards.remove();
+  const card = document.querySelector('.places__item');
+  card.remove();
 }
 
 
