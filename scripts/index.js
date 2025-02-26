@@ -1,7 +1,7 @@
 // @todo: Темплейт карточки
 // @todo: DOM узлы
 /*const cardTemp = document.querySelector('#card-template').content;
-//const addButton = document.querySelector('.profile__add-button');
+const addButton = document.querySelector('.profile__add-button');
 const deleteButton = document.querySelector('.card__delete-button');*/
 const placesList = document.querySelector(".places__list");
 
@@ -14,7 +14,6 @@ function addCard({ name, link }) {
     .cloneNode(true);
   cardElement.querySelector(".card__title").textContent = name;
   cardElement.querySelector(".card__image").src = link;
-
   const deleteButton = cardElement.querySelector(".card__delete-button");
   deleteButton.addEventListener("click", deleteCard);
 
