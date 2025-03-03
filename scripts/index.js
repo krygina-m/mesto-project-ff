@@ -14,7 +14,7 @@ function addCard({ name, link }, deleteCard) {
   cardElement.querySelector(".card__title").textContent = name;
   cardElement.querySelector(".card__image").src = link;
   cardElement.querySelector(".card__image").alt = name;
-  const deleteButton = cardElement.querySelector(".card__delete-button"); 
+  const deleteButton = cardElement.querySelector(".card__delete-button");
   deleteButton.addEventListener("click", () => deleteCard(cardElement));
 
   return cardElement;
@@ -26,5 +26,6 @@ function deleteCard(cardElement) {
 }
 
 // @todo: Вывести карточки на страницу
-initialCards.map(card => addCard(card, deleteCard)).forEach((card) => cardsContainer.append(card));
-
+initialCards
+  .map((card) => addCard(card, deleteCard))
+  .forEach((card) => cardsContainer.append(card));
