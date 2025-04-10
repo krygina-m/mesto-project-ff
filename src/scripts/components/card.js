@@ -12,8 +12,8 @@ function addCard({ name, link }, deleteCard, likeCard, handleImageClick) {
   const cardLike = cardElement.querySelector(".card__like-button");
   cardLike.addEventListener("click", () => likeCard(cardLike));
 
-  const cardImage = cardElement.querySelector('.card__image');
-  cardImage.addEventListener('click', () => handleImageClick({ name, link }));
+  const cardImage = cardElement.querySelector(".card__image");
+  cardImage.addEventListener("click", () => handleImageClick({ name, link }));
 
   return cardElement;
 }
@@ -26,6 +26,5 @@ function deleteCard(cardElement) {
 function likeCard(cardLike) {
   cardLike.classList.toggle("card__like-button_is-active");
 }
-
 
 export { addCard, deleteCard, likeCard };
