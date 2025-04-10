@@ -1,25 +1,3 @@
-
-
-// @todo: Функция создания карточки
-
-/*function addCard({ name, link }, deleteCard) {
-  const cardTemplate = document.querySelector("#card-template").content;
-  const cardElement = cardTemplate
-    .querySelector(".places__item")
-    .cloneNode(true);
-  cardElement.querySelector(".card__title").textContent = name;
-  cardElement.querySelector(".card__image").src = link;
-  cardElement.querySelector(".card__image").alt = name;
-  const deleteButton = cardElement.querySelector(".card__delete-button");
-  deleteButton.addEventListener("click", () => deleteCard(cardElement));
-
-  return cardElement;
-}
-
-// @todo: Функция удаления карточки
-function deleteCard(cardElement) {
-  cardElement.remove();
-}*/
 import './pages/index.css';
 
 import { initialCards } from './scripts/cards.js';
@@ -47,7 +25,7 @@ const popupProfileEdit = document.querySelector('.popup_type_edit'); //
 const profileAddButton = document.querySelector('.profile__add-button');//
 const closePopupButton = document.querySelectorAll('.popup__close'); //
  
-const imageButton = document.querySelectorAll('.card__image');// 
+const imageButtons = document.querySelectorAll('.card__image');// 
 const popupAddCard = document.querySelector('.popup_type_new-card'); // 
 const popupImage = document.querySelector('.popup_type_image');// 
 const popupBg = document.querySelector('.page__content'); //
@@ -72,7 +50,7 @@ profileAddButton.addEventListener("click", () => {
   openPopup(popupImage);
 });*/
 
-imageButton.forEach(function(elem) {
+imageButtons.forEach(function(elem) {
   elem.addEventListener("click", () => {
     openPopup(popupImage);
   });
@@ -122,19 +100,17 @@ formEditProfile.addEventListener('submit', handleFormSubmit);
 //ДОБАВЛЕНИЕ НОВОЙ КАРТОЧКИ ЧЕРЕЗ ФОРМУ
 
 const formCardAdd = document.querySelector('.popup_type_new-card .popup__form');
-
 const nameCardInput = formCardAdd.querySelector('.popup__input_type_card-name');
 const urlInput = formCardAdd.querySelector('.popup__input_type_url');
+
 
 function handleFormAddCard(evt) {
   evt.preventDefault();
   
   const name = nameCardInput.value;
-  const url = urlInput.value;
-  console.log(name);
-  console.log(url);
+  const link = urlInput.value;
 
-  const newCard = addCard({ name, url }, deleteCard, likeCard, handleImageClick);
+  const newCard = addCard({ name, link }, deleteCard, likeCard, handleImageClick);
   const popupNewCard = document.querySelector('.popup_type_new-card');
   cardsContainer.prepend(newCard);
 
@@ -155,6 +131,7 @@ export function handleImageClick (cardData) {
   imageInPopup.src = cardData.link;
   imageInPopup.alt = cardData.name;
   imageInPopup.textContent = cardData.name;
+  captionInPopup.textContent = cardData.name;
   
   openPopup(popupImage);
 }
