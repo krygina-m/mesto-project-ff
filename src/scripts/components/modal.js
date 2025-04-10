@@ -40,8 +40,6 @@ addEventListenerFunction(popupAddCard);
 addEventListenerFunction(popupImage);
 
 
-
-
 // закрытие по клику на оверлей
 popups.forEach((popup) =>
   popup.addEventListener('mousedown', (evt) => {

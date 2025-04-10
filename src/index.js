@@ -37,7 +37,7 @@ const cardsContainer = document.querySelector(".places__list");
 //
 // @todo: Вывести карточки на страницу
 initialCards
-  .map((card) => addCard(card, deleteCard, likeCard))
+  .map((card) => addCard(card, deleteCard, likeCard, handleImageClick))
   .forEach((card) => cardsContainer.append(card));
 
 
@@ -47,7 +47,7 @@ const popupProfileEdit = document.querySelector('.popup_type_edit'); //
 const profileAddButton = document.querySelector('.profile__add-button');//
 const closePopupButton = document.querySelectorAll('.popup__close'); //
  
-const imageButton = document.querySelector('.card__image');// 
+const imageButton = document.querySelectorAll('.card__image');// 
 const popupAddCard = document.querySelector('.popup_type_new-card'); // 
 const popupImage = document.querySelector('.popup_type_image');// 
 const popupBg = document.querySelector('.page__content'); //
@@ -55,14 +55,27 @@ const popupBg = document.querySelector('.page__content'); //
 
 editPopupButton.addEventListener("click", () => {
   openPopup(popupProfileEdit);
+  const formEditProfile = document.querySelector('.popup_type_edit .popup__form');
+// Находим поля формы в DOM
+  const nameInput = formEditProfile.querySelector('.popup__input_type_name'); // Воспользуйтесь инструментом .querySelector()
+  const jobInput = formEditProfile.querySelector('.popup__input_type_description');// Воспользуйтесь инструментом .querySelector()
+
+  nameInput.value = document.querySelector('.profile__title').textContent;
+  jobInput.value = document.querySelector('.profile__description').textContent;
 });
 
 profileAddButton.addEventListener("click", () => {
   openPopup(popupAddCard);
 });
 
-imageButton.addEventListener("click", () => {
+/*imageButton.addEventListener("click", () => {
   openPopup(popupImage);
+});*/
+
+imageButton.forEach(function(elem) {
+  elem.addEventListener("click", () => {
+    openPopup(popupImage);
+  });
 });
 
 addEventListenerFunction(popupProfileEdit);
@@ -81,6 +94,8 @@ const formEditProfile = document.querySelector('.popup_type_edit .popup__form');
 const nameInput = formEditProfile.querySelector('.popup__input_type_name'); // Воспользуйтесь инструментом .querySelector()
 const jobInput = formEditProfile.querySelector('.popup__input_type_description');// Воспользуйтесь инструментом .querySelector()
 
+/*nameInput.value = document.querySelector('.profile__title').textContent;
+jobInput.value = document.querySelector('.profile__description').textContent;*/
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function handleFormSubmit(evt) {
@@ -89,12 +104,15 @@ function handleFormSubmit(evt) {
     const name = nameInput.value;
     const job = jobInput.value;
     // Выберите элементы, куда должны быть вставлены значения полей
-    const form = document.querySelector('.popup_type_edit .popup__form');
-    const formName = form.querySelector('.popup__input_type_name');
-    const formJob = form.querySelector('.popup__input_type_description');
+    const form = document.querySelector('.profile__info');
+    const formName = form.querySelector('.profile__title');
+    const formJob = form.querySelector('.profile__description');
     // Вставьте новые значения с помощью textContent\
     formName.textContent = name;
     formJob.textContent = job;
+
+    document.querySelector('.popup_type_edit').classList.remove('popup_is-opened');
+    formEditProfile.reset();
 }
 
 // Прикрепляем обработчик к форме:
@@ -110,10 +128,13 @@ const urlInput = formCardAdd.querySelector('.popup__input_type_url');
 
 function handleFormAddCard(evt) {
   evt.preventDefault();
+  
   const name = nameCardInput.value;
   const url = urlInput.value;
+  console.log(name);
+  console.log(url);
 
-  const newCard = addCard({name, url}, deleteCard, likeCard);
+  const newCard = addCard({ name, url }, deleteCard, likeCard, handleImageClick);
   const popupNewCard = document.querySelector('.popup_type_new-card');
   cardsContainer.prepend(newCard);
 
@@ -124,3 +145,16 @@ function handleFormAddCard(evt) {
 
 formCardAdd.addEventListener('submit', handleFormAddCard);
  
+
+
+//ОТКРЫТИЕ МОДАЛКИ С КАРТИНКОЙ
+const imageInPopup = popupImage.querySelector('.popup__image');
+const captionInPopup = popupImage.querySelector('.popup__caption');
+
+export function handleImageClick (cardData) {
+  imageInPopup.src = cardData.link;
+  imageInPopup.alt = cardData.name;
+  imageInPopup.textContent = cardData.name;
+  
+  openPopup(popupImage);
+}
