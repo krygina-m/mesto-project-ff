@@ -29,14 +29,10 @@ const popupBg = document.querySelector(".page__content"); //
 
 editPopupButton.addEventListener("click", () => {
   openPopup(popupProfileEdit);
-  const formEditProfile = document.querySelector(
-    ".popup_type_edit .popup__form"
-  );
+  const formEditProfile = document.querySelector(".popup_type_edit .popup__form");
   // Находим поля формы в DOM
   const nameInput = formEditProfile.querySelector(".popup__input_type_name"); // Воспользуйтесь инструментом .querySelector()
-  const jobInput = formEditProfile.querySelector(
-    ".popup__input_type_description"
-  ); // Воспользуйтесь инструментом .querySelector()
+  const jobInput = formEditProfile.querySelector(".popup__input_type_description"); // Воспользуйтесь инструментом .querySelector()
 
   nameInput.value = document.querySelector(".profile__title").textContent;
   jobInput.value = document.querySelector(".profile__description").textContent;
@@ -61,9 +57,7 @@ addEventListenerFunction(popupImage);
 const formEditProfile = document.querySelector(".popup_type_edit .popup__form");
 // Находим поля формы в DOM
 const nameInput = formEditProfile.querySelector(".popup__input_type_name"); // Воспользуйтесь инструментом .querySelector()
-const jobInput = formEditProfile.querySelector(
-  ".popup__input_type_description"
-); // Воспользуйтесь инструментом .querySelector()
+const jobInput = formEditProfile.querySelector(".popup__input_type_description"); // Воспользуйтесь инструментом .querySelector()
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
