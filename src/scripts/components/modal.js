@@ -1,6 +1,3 @@
-// все попапы
-const popups = document.querySelectorAll(".popup");
-
 const closePopupWhenPressEsc = (evt) => {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector(".popup_is-opened");
@@ -30,23 +27,3 @@ export const addEventListenerFunction = (popupElement) => {
     }
   });
 };
-
-const popupProfileEdit = document.querySelector(".popup_type_edit"); // попапРедактированияПрофия
-const popupAddCard = document.querySelector(".popup_type_new-card"); // попапДобавленияКарточки
-const popupImage = document.querySelector(".popup_type_image"); // попапКартинки
-
-addEventListenerFunction(popupProfileEdit);
-addEventListenerFunction(popupAddCard);
-addEventListenerFunction(popupImage);
-
-// закрытие по клику на оверлей
-popups.forEach((popup) =>
-  popup.addEventListener("mousedown", (evt) => {
-    if (
-      evt.target.classList.contains("popup") ||
-      evt.target.classList.contains("popup__close-button")
-    ) {
-      closePopup(popup);
-    }
-  })
-);
