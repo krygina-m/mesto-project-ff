@@ -4,7 +4,7 @@ import { initialCards } from "./scripts/cards.js";
 
 import { addCard, deleteCard, likeCard } from "./scripts/components/card.js";
 
-import { openPopup } from "./scripts/components/modal.js";
+import { openPopup, closePopup } from "./scripts/components/modal.js";
 
 import { addEventListenerFunction } from "./scripts/components/modal.js";
 
@@ -58,7 +58,7 @@ function handleProfileFormSubmit(evt) {
   formName.textContent = name;
   formJob.textContent = job;
 
-  popupProfileEdit.classList.remove("popup_is-opened");
+  closePopup(popupProfileEdit);
   formEditProfile.reset();
 }
 
@@ -84,7 +84,7 @@ function handleFormAddCard(evt) {
   );
   cardsContainer.prepend(newCard);
 
-  popupAddCard.classList.remove("popup_is-opened");
+  closePopup(popupAddCard);
 
   formCardAdd.reset();
 }
