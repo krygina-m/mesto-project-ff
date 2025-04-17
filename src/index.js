@@ -37,7 +37,7 @@ const cardsContainer = document.querySelector(".places__list");
 // @todo: Вывести карточки на страницу
 function addInitCards(initialCards) {
   initialCards
-  .map((card) => addCard(card, deleteCard, likeCard, handleImageClick))
+  .map((card) => addCard(card, profileId, deleteCard, likeCard, handleImageClick))
   .forEach((card) => cardsContainer.append(card));
 }
 
@@ -184,9 +184,10 @@ function handleFormAddCard(evt) {
   const link = urlInput.value;
   
   addNewCard(name, link)
-    .then(({ name, link }) => {
+    .then((data) => {
       const newCard = addCard(
-        { name, link },
+        data,
+        profileId,
         deleteCard,
         likeCard,
         handleImageClick

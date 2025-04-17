@@ -1,4 +1,6 @@
-function addCard({ name, link }, deleteCard, likeCard, handleImageClick) {
+function addCard(data, profileId, deleteCard, likeCard, handleImageClick) {
+  const name = data.name;
+  const link = data.link;
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate
     .querySelector(".places__item")
@@ -9,11 +11,17 @@ function addCard({ name, link }, deleteCard, likeCard, handleImageClick) {
   const deleteButton = cardElement.querySelector(".card__delete-button");
   deleteButton.addEventListener("click", () => deleteCard(cardElement));
 
+  if (data.owner._id !== profileId) {
+    deleteButton.remove();
+  } else {
+    deleteButton.addEventListener("click", () => deleteCard(cardElement));
+  }
+
   const cardLike = cardElement.querySelector(".card__like-button");
   cardLike.addEventListener("click", () => likeCard(cardLike));
 
   const cardImage = cardElement.querySelector(".card__image");
-  cardImage.addEventListener("click", () => handleImageClick({ name, link }));
+  cardImage.addEventListener("click", () => handleImageClick(data));
 
   return cardElement;
 }
