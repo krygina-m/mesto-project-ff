@@ -1,14 +1,13 @@
 const config = {
-  baseUrl: "https://nomoreparties.co/v1/wff-cohort-36",
+  baseUrl: 'https://nomoreparties.co/v1/wff-cohort-36',
   headers: {
-    authorization: "ad40ff38b-47e5-44c0-bb2c-ab9c5ea3d901",
+    authorization: 'd40ff38b-47e5-44c0-bb2c-ab9c5ea3d901',
     "Content-Type": "application/json",
   },
 };
 
 export const getUserInfo = () => {
   return fetch(`${config.baseUrl}/users/me`, {
-    method: "GET",
     headers: config.headers,
   })
   .then(handleResponse);
@@ -30,8 +29,7 @@ export const editUserInfo = (name, job) => {
       name: name,
       about: job,
     }),
-  })
-  .then(handleResponse);
+  }).then(handleResponse);
 };
 
 export const addNewCard = (name, link) => {
@@ -85,6 +83,7 @@ export const handleResponse = (res) => {
   if (res.ok) {
     return res.json();
   } else {
+    console.log('Error');
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 };
