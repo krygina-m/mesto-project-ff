@@ -8,7 +8,10 @@ import { openPopup, closePopup } from "./scripts/components/modal.js";
 
 import { addEventListenerFunction } from "./scripts/components/modal.js";
 
-import { enableValidation, clearValidation } from "./scripts/components/validation";
+import {
+  enableValidation,
+  clearValidation,
+} from "./scripts/components/validation";
 
 import {
   getUserInfo,
@@ -19,7 +22,6 @@ import {
 } from "./scripts/components/api.js";
 
 let profileId;
-
 
 const validationData = {
   formSelector: ".popup__form",
@@ -35,8 +37,10 @@ const cardsContainer = document.querySelector(".places__list");
 // @todo: Вывести карточки на страницу
 function addInitCards(initialCards) {
   initialCards
-  .map((card) => addCard(card, profileId, deleteCard, likeCard, handleImageClick))
-  .forEach((card) => cardsContainer.append(card));
+    .map((card) =>
+      addCard(card, profileId, deleteCard, likeCard, handleImageClick)
+    )
+    .forEach((card) => cardsContainer.append(card));
 }
 
 //addInitCards(initialCards);
@@ -51,13 +55,14 @@ const popupAddCard = document.querySelector(".popup_type_new-card"); //попа�
 const popupImage = document.querySelector(".popup_type_image"); //попап просмотра картинки
 
 const nameInput = formEditProfile.querySelector(".popup__input_type_name"); //поле редактирования имени
-const jobInput = formEditProfile.querySelector(".popup__input_type_description"); //поле редактирования описание
+const jobInput = formEditProfile.querySelector(
+  ".popup__input_type_description"
+); //поле редактирования описание
 
 const popupAvatarEdit = document.querySelector(".popup_type_change-avatar");
 // формы, кроме редактирования профиля
 const formNewCard = document.forms["new-place"];
 const formEditAvatar = document.forms["update-avatar"];
-
 
 // кнопки открытия формы
 const formNewCardButton = formNewCard.querySelector(".popup__button");
@@ -107,7 +112,7 @@ cardAddButton.addEventListener("click", () => {
 });
 
 //РЕДАКТИРОВАНИЕ АВАТАРА СЛУШАТЕЛЬ
-avatarImage.addEventListener('click', () => {
+avatarImage.addEventListener("click", () => {
   openPopup(popupAvatarEdit);
   formEditAvatar.reset();
   clearValidation(formEditAvatar, validationData);
@@ -144,7 +149,7 @@ function handleProfileFormSubmit(evt) {
   // Получите значение полей jobInput и nameInput из свойства value
   const name = nameInput.value;
   const description = jobInput.value;
-  
+
   editUserInfo(name, description)
     .then((userData) => {
       formName.textContent = userData.name;
@@ -176,7 +181,7 @@ function handleFormAddCard(evt) {
 
   const name = nameCardInput.value;
   const link = urlInput.value;
-  
+
   addNewCard(name, link)
     .then((data) => {
       const newCard = addCard(
@@ -187,9 +192,9 @@ function handleFormAddCard(evt) {
         handleImageClick
       );
       cardsContainer.prepend(newCard);
-    
+
       closePopup(popupAddCard);
-    
+
       formCardAdd.reset();
 
       clearValidation(formNewCard, validationData);
@@ -216,6 +221,5 @@ export function handleImageClick(cardData) {
 
   openPopup(popupImage);
 }
-
 
 enableValidation(validationData);

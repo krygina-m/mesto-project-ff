@@ -17,7 +17,9 @@ function addCard(data, profileId, deleteCard, likeCard, handleImageClick) {
   if (data.owner._id !== profileId) {
     deleteButton.remove();
   } else {
-    deleteButton.addEventListener("click", () => deleteCard(cardElement, cardId));
+    deleteButton.addEventListener("click", () =>
+      deleteCard(cardElement, cardId)
+    );
   }
 
   const cardLike = cardElement.querySelector(".card__like-button");
@@ -25,6 +27,11 @@ function addCard(data, profileId, deleteCard, likeCard, handleImageClick) {
   if (data.likes.length != 0) {
     likeCount.textContent = data.likes.length;
   }
+
+  if (data.likes.some((like) => like._id === profileId)) {
+    cardLike.classList.add("card__like-button_is-active");
+  }
+
   cardLike.addEventListener("click", () => likeCard(event, cardId, likeCount));
 
   const cardImage = cardElement.querySelector(".card__image");
@@ -36,12 +43,12 @@ function addCard(data, profileId, deleteCard, likeCard, handleImageClick) {
 // @todo: Функция удаления карточки
 function deleteCard(cardElement, cardId) {
   removeCard(cardId)
-  .then(() => {
-    cardElement.remove();
-  })
-  .catch((err) => {
-    console.log(`Ошибка при удалении карточки: ${err}`);
-  });
+    .then(() => {
+      cardElement.remove();
+    })
+    .catch((err) => {
+      console.log(`Ошибка при удалении карточки: ${err}`);
+    });
 }
 
 // @todo: Функция лайка карточки
@@ -55,16 +62,14 @@ function likeCard(evt, cardId, likeCount) {
       if (isLiked) {
         evt.target.classList.remove("card__like-button_is-active");
         if (data.likes.length === 0) {
-          likeCount.textContent = '';
+          likeCount.textContent = "";
         }
       } else {
         evt.target.classList.add("card__like-button_is-active");
       }
     })
     .catch((err) => {
-      console.log(
-        `Ошибка: ${err}`
-      );
+      console.log(`Ошибка: ${err}`);
     });
 }
 
