@@ -44,7 +44,7 @@ export const addNewCard = (name, link) => {
   .then(handleResponse);
 };
 
-export const removeCard = (id) => {
+export const deleteCard = (id) => {
   return fetch(`${config.baseUrl}/cards/${id}`, {
     method: "DELETE",
     headers: config.headers,
