@@ -109,6 +109,8 @@ editPopupButton.addEventListener("click", () => {
 //ДОБАВЛЕНИЕ КАРТОЧКИ СЛУШАТЕЛЬ
 cardAddButton.addEventListener("click", () => {
   openPopup(popupAddCard);
+  formNewCard.reset();
+  clearValidation(formNewCard, validationData);
 });
 
 //РЕДАКТИРОВАНИЕ АВАТАРА СЛУШАТЕЛЬ
@@ -154,6 +156,8 @@ function handleProfileFormSubmit(evt) {
     .then((userData) => {
       formName.textContent = userData.name;
       formJob.textContent = userData.about;
+      closePopup(popupProfileEdit);
+      formEditProfile.reset();
     })
     .catch((err) => {
       console.error(`Ошибка: ${err}`);
@@ -162,8 +166,7 @@ function handleProfileFormSubmit(evt) {
       renderLoading(false, formEditProfileButton);
     });
 
-  closePopup(popupProfileEdit);
-  formEditProfile.reset();
+  
 }
 
 // СЛУШАТЕЛЬ НА РЕДАКТИРОВАНИЕ ФОРМЫ ПРОФИЛЯ
@@ -197,7 +200,7 @@ function handleFormAddCard(evt) {
 
       formCardAdd.reset();
 
-      clearValidation(formNewCard, validationData);
+      //clearValidation(formNewCard, validationData);
     })
     .catch((err) => {
       console.log(`Ошибка добавления карточки: ${err}`);

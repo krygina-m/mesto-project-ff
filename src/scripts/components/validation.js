@@ -5,21 +5,21 @@ export function showInputError(
   errorMessage
 ) {
   const formError = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(validationData.inputErrorClass);
+  inputElement.classList.add(validationData.errorClass);
   formError.textContent = errorMessage;
-  formError.classList.add(validationData.errorClass);
+  formError.classList.add(validationData.inputErrorClass);
 }
 
 export function hideInputError(validationData, formElement, inputElement) {
   const formError = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(validationData.inputErrorClass);
+  inputElement.classList.remove(validationData.errorClass);
   formError.textContent = "";
-  formError.classList.remove(validationData.errorClass);
+  formError.classList.remove(validationData.inputErrorClass);
 }
 
 function isValid(validationData, formElement, inputElement) {
   if (inputElement.validity.patternMismatch) {
-    inputElement.setCustomValidity(inputElement.dataset.error);
+    inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
     inputElement.setCustomValidity("");
   }
