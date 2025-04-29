@@ -55,9 +55,7 @@ const popupAddCard = document.querySelector(".popup_type_new-card"); //попа�
 const popupImage = document.querySelector(".popup_type_image"); //попап просмотра картинки
 
 const nameInput = formEditProfile.querySelector(".popup__input_type_name"); //поле редактирования имени
-const jobInput = formEditProfile.querySelector(
-  ".popup__input_type_description"
-); //поле редактирования описание
+const jobInput = formEditProfile.querySelector(".popup__input_type_description"); //поле редактирования описание
 
 const popupAvatarEdit = document.querySelector(".popup_type_change-avatar");
 // формы, кроме редактирования профиля
@@ -165,8 +163,6 @@ function handleProfileFormSubmit(evt) {
     .finally(() => {
       renderLoading(false, formEditProfileButton);
     });
-
-  
 }
 
 // СЛУШАТЕЛЬ НА РЕДАКТИРОВАНИЕ ФОРМЫ ПРОФИЛЯ
